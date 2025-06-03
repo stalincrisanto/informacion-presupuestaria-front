@@ -2,11 +2,9 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material";
 
-// TODO: errors on input
-// quitar la sombre que aparece luego qe se escriba en el input
 interface InputProps {
   type?: string;
-  value: string;
+  value?: string | File | null;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
@@ -32,13 +30,18 @@ const Input: React.FC<InputProps> = ({
       {label && <CustomLabel>{label}</CustomLabel>}
       <StyledTextField
         type={type}
-        value={value}
+        {...(type !== "file" ? { value } : {})} // Solo pasa value si no es tipo file
         onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
         fullWidth
         error={!!errorText}
         variant="outlined"
+        {...(type === "file" ? {
+          InputProps: {
+            readOnly: true,
+          }
+        } : {})}
       />
       {errorText && <ErrorText>{errorText}</ErrorText>}
     </Container>
