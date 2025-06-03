@@ -1,8 +1,8 @@
-import FacturasMain from "@/screens/facturas";
+import Index from "@/screens";
 import React from "react";
 
 const facturas = () => {
-  return <FacturasMain />;
+  return <Index />;
 };
 
 export default facturas;
