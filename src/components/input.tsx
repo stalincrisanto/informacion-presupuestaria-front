@@ -12,6 +12,7 @@ interface InputProps {
   label?: string;
   sx?: object;
   errorText?: string;
+  variant?: "outlined" | "filled" | "standard";
 }
 
 const Input: React.FC<InputProps> = ({
@@ -24,19 +25,20 @@ const Input: React.FC<InputProps> = ({
   label = "",
   sx = {},
   errorText = "",
+  variant = "outlined",
 }) => {
   return (
     <Container className={className} style={{ ...sx }}>
       {label && <CustomLabel>{label}</CustomLabel>}
       <StyledTextField
         type={type}
-        {...(type !== "file" ? { value } : {})} // Solo pasa value si no es tipo file
+        {...(type !== "file" ? { value } : {})}
         onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
         fullWidth
         error={!!errorText}
-        variant="outlined"
+        variant={variant}
         {...(type === "file" ? {
           InputProps: {
             readOnly: true,

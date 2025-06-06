@@ -1,8 +1,8 @@
-import Index from "@/screens";
+import LoginMain from "@/screens/login";
 import React from "react";
 
-const facturas = () => {
-  return <Index />;
+const Login = () => {
+  return <LoginMain />;
 };
 
-export default facturas;
+export default Login;

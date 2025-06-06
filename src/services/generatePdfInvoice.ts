@@ -1,17 +1,24 @@
-import { Invoice } from "@/types/invoice";
-
-export const generatePdfInvoice = async (invoice: Invoice) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/invoices`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ invoice: invoice })
-  });
-
+export const loginService = async ({
+  username,
+  password,
+}: LoginCredentials) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    }
+  );
   if (!response.ok) {
-    throw new Error("Error al generar PDF");
+    throw new Error("Login failed");
   }
-
-  return await response.blob();
+  return response;
 };
+
+interface LoginCredentials {
+  username: string;
+  password: string;
+}
