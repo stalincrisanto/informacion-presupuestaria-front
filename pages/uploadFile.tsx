@@ -1,9 +1,9 @@
 
-import Index from "@/screens";
+import UploadFileIndex from "@/screens/uploadFile/uploadFile";
 import React from "react";
 
 const UploadFile = () => {
-  return <Index />;
+  return <UploadFileIndex />;
 };
 
 export default UploadFile;

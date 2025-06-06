@@ -5,8 +5,9 @@ import { Box, CircularProgress } from "@mui/material";
 import React, { useState } from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ButtonComponent from "@/components/button";
+import { uploadFile } from "@/services/uploadFile";
 
-const Index = () => {
+const UploadFileIndex = () => {
   const { enqueueSnack } = useSnack();
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -28,16 +29,27 @@ const Index = () => {
   const handleUpload = async () => {
     if (!file) return;
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      const isSuccess = false;
-      isSuccess
-        ? enqueueSnack("Archivo subido correctamente", "success")
-        : enqueueSnack("Error al subir el archivo", "error");
+    try {
+        const formData = new FormData();
+        formData.append("file", file);
+        const uploadResponse = await uploadFile(formData);
+        enqueueSnack("Archivo subido de forma correcta");
+    } catch (error) {
+        enqueueSnack("Error al subir el archivo", "error");
+    } finally {
+        setIsLoading(false);
+    }
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    //   const isSuccess = false;
+    //   isSuccess
+    //     ? enqueueSnack("Archivo subido correctamente", "success")
+    //     : enqueueSnack("Error al subir el archivo", "error");
 
-      setFile(null);
-    }, 10000);
-    setFile(null);
+    //   setFile(null);
+    // }, 10000);
+    // setFile(null);
+    
   };
 
   return (
@@ -106,4 +118,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default UploadFileIndex;
