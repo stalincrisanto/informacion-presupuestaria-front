@@ -9,6 +9,7 @@ import "@/styles/globals.css";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
 import { SnackbarProvider } from "notistack";
+import { SessionProvider } from "next-auth/react";
 
 dayjs.locale("es");
 
@@ -25,7 +26,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <SnackbarProvider maxSnack={3}>
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
           <Layout>
-            <Component {...pageProps} />
+            <SessionProvider session={pageProps.session}>
+              <Component {...pageProps} />
+            </SessionProvider>
           </Layout>
         </LocalizationProvider>
       </SnackbarProvider>

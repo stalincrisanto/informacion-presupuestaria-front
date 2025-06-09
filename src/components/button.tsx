@@ -8,6 +8,7 @@ interface ButtonProps {
   sx?: object;
   fullWidth?: boolean;
   disabled?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
 const ButtonComponent: React.FC<ButtonProps> = ({
@@ -17,6 +18,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({
   sx,
   fullWidth,
   disabled = false,
+  type = "button",
 }) => {
   return (
     <Button
@@ -26,6 +28,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({
       sx={{ marginTop: 2, ...sx }}
       fullWidth={fullWidth}
       disabled={disabled}
+      type={type}
     >
       {label}
     </Button>
